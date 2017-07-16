@@ -1,4 +1,4 @@
-# Building QGIS on the Atmosphere VM
+# Building QGIS on Atmosphere VM [Ubuntu 16]
 
 Install GRASS
 

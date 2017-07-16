@@ -1,5 +1,17 @@
 # Building QGIS on the Atmosphere VM
 
+Install GRASS
+
+```
+sudo add-apt-repository ppa:ubuntugis/ubuntugis-experimental
+sudo add-apt-repository ppa:grass/grass-devel
+```
+
+```
+sudo apt-get update
+sudo apt-get install -y grass-daily
+```
+
 Configure the QGIS repository, append to `/etc/apt/sources.list`:
 
 ```
@@ -25,7 +37,7 @@ sudo apt-get update
 sudo apt-get install -y qgis python-qgis qgis-plugin-grass
 ```
 
-Log into the Apache Guacamole web shell and right click mouse, select Education > QGIS Desktop
+Log into the Apache Guacamole web shell and right click mouse, select Applications > Education > QGIS Desktop
 
 Right click on desktop and open Terminal Emulator, increase screen resolution:
 

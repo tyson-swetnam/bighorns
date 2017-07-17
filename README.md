@@ -5,6 +5,15 @@ The point of the project is to vertically sample ~60,000 radio collar GPS locati
 
 We will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/) the daily average (global irradiation) for the heat load index of the site, as well as the topographic metrics of each GPS collar location.
 
+For the daily/hourly solar models, I am thinking of using the [r.out.xyz](https://grass.osgeo.org/grass72/manuals/r.out.xyz.html) function in a python script
+
+Essentially, I'll parse the .csv file line by line for its longitude and latitude (X,Y) coordinates, the date and the hour of the GPS collar transmission.
+
+I will then run the r.out.xyz with an $X $Y $DAY $HOUR wildcard to select the location and the appropriate raster to sample from the directory.
+
+The results will be written to an output CSV file.
+
+
 |r.sun|Direct Radiation (daily)|Radiation (hourly)|Radiation (monthly)|
 |-----|------------------------|------------------|-------------------|
 |Units| w m2 | | | |

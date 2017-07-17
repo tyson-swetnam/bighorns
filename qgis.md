@@ -3,13 +3,13 @@
 Install GRASS
 
 ```
-sudo add-apt-repository ppa:ubuntugis/ubuntugis-experimental
-sudo add-apt-repository ppa:grass/grass-devel
+# Add Ubuntu Unstable PPA when running LTS Ubuntu release
+sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
 ```
 
 ```
 sudo apt-get update
-sudo apt-get install -y grass-daily
+sudo apt-get install -y grass
 ```
 
 Configure the QGIS repository, append to `/etc/apt/sources.list`:

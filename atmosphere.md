@@ -23,7 +23,7 @@ ezj -R -3
 Change ownership of the `/home/anaconda3/` directory
 
 ```
-sudo chown CyVerseUserID:iplant-everyone /home/anaconda3 -R
+sudo chown ${USER}:iplant-everyone /home/anaconda3 -R
 ```
 
 Install R-essentials package

@@ -17,6 +17,10 @@ We are going to use container technology, i.e. Docker and Singularity, to run ou
 ### Install Jupyter Notebooks (Anaconda) with the R kernel and Python3
 
 ```
+sudo apt-get update
+```
+
+```
 ezj -R -3
 ```
 
@@ -74,4 +78,12 @@ ezs
 ```
 PUBLIC_IP=$(curl -s https://4.ifcfg.me/)
 jupyter lab --no-browser --ip=0.0.0.0 2>&1 | sed s/0.0.0.0/$PUBLIC_IP/g
+```
+
+## Using the Web Desktop
+
+### Accessing CyVerse DataStore using `kanki-irodsclient` (Ubuntu 16.04)
+
+```
+
 ```

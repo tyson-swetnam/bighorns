@@ -111,12 +111,22 @@ sudo sh -c 'echo "export RSTUDIO_WHICH_R="/home/anaconda3/bin/R"" >> ~/.bash_pro
 
 ```
 sudo apt-get install gdebi-core
+```
+
+4. modify `/etc/rstudio/rserver.conf`
+
+```
+sudo sh -c 'echo "rsession-which-r=/home/anaconda3/bin/R" >> /etc/rstudio/rserver.conf'
+```
+5. Install RStudio-Server
+
+```
 cd /home
 sudo wget https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
 sudo gdebi -n rstudio-server-1.0.143-amd64.deb
 ```
 
-Note - this will fail on the first try. 
+Note - this *might* fail on the first try. 
 ```
 user_name@128:/home$ sudo gdebi rstudio-server-1.0.143-amd64.deb
 Reading package lists... Done
@@ -157,20 +167,13 @@ May 13 09:30:40 128.196.64.129 systemd[1]: rstudio-server.service: Main process 
 Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
-
-4. modify `/etc/rstudio/rserver.conf`
-
-```
-sudo sh -c 'echo "rsession-which-r=/home/anaconda3/bin/R" >> /etc/rstudio/rserver.conf'
-```
-
-5. Restart RStudio-Server
+6. Restart RStudio-Server
 
 ```
 rstudio-server start
 ```
 
-6. There were a couple of issues installing packages for the first time in RStudio
+7. There were a couple of issues installing packages for the first time in RStudio
 
 In R:
 ```

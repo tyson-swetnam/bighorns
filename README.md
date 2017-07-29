@@ -1,9 +1,13 @@
 # bighorns
-Repo for virtual machine set up, software installation, and GRASS and GDAL scripts for AZ Bighorns study in collaboration with NMGFD and University of NM (Las Cruces).
+Repo for virtual machine set up, software installation, and GRASS and GDAL scripts for AZ Bighorns study in collaboration with NMGFD and New Mexico State University (Las Cruces).
 
-The intent of the project is to vertically sample ~60,000 radio collar GPS locations down to their date and hour, by the solar irradiation of the location across an entire year (~5,800 rasters). We also want to calculate heat load of the surface to infer a daily temperature for the site.
+The intent of the project is to vertically sample ~60,000 radio collar GPS locations down to their date and hour, by the solar irradiation of the location across an entire year (~5,800 rasters). We also want to calculate heat load of the surface to infer a daily temperature for the site at the time of the GPS ping. 
 
-We will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/) the daily average (global irradiation) for the heat index of the site, as well as the topographic metrics of each GPS collar location.
+To calculate the heat load index I am using my `Sol` distributed computing method.
+
+We will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/) the monthly summed global irradiation and hours of insolation, in addition to calculating the heat index of the site, and topographic metrics of each GPS collar location.
+
+We have the opporunity to use the DAYMET daily data archive, but a script must be written to pull those data from the [ORNL DAAC](https://daymet.ornl.gov/). 
 
 For the daily/hourly solar models, I am thinking of using the [r.out.xyz](https://grass.osgeo.org/grass72/manuals/r.out.xyz.html) function in a python script
 

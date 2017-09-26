@@ -48,3 +48,5 @@ if [ $FLAV = "xenial" ]; then
   else
   sudo apt-get install -y gdal libgdal libgdal1
 fi
+
+sudo apt -y autoremove

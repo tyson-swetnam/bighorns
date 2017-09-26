@@ -7,8 +7,6 @@ To calculate the heat load index I am using my `Sol` distributed computing metho
 
 We will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/) the monthly summed global irradiation and hours of insolation, in addition to calculating the heat index of the site, and topographic metrics of each GPS collar location.
 
-We have the opporunity to use the DAYMET daily data archive, but a script must be written to pull those data from the [ORNL DAAC](https://daymet.ornl.gov/). 
-
 For the daily/hourly solar models, I am thinking of using the [r.out.xyz](https://grass.osgeo.org/grass72/manuals/r.out.xyz.html) function in a python script
 
 Essentially, I'll parse the .csv file line by line for its longitude and latitude (X,Y) coordinates, the date and the hour of the GPS collar transmission.
@@ -18,9 +16,9 @@ I will then run the r.out.xyz with an $X $Y $DAY $HOUR wildcard to select the lo
 The results will be written to an output CSV file.
 
 
-|r.sun|Direct Radiation (daily)|Radiation (hourly)|Radiation (monthly)|
-|-----|------------------------|------------------|-------------------|
-|Units| w m2 | | | |
+|r.sun|Direct Radiation (daily)|Global Radiation (daily)|Radiation (hourly)|Radiation (monthly)|
+|-----|------------------------|------------------------|------------------|-------------------|
+|Units| w m2 | | | | |
 
 |Topography|Slope|Aspect|Topographic Position Index|Topographic Wetness Index|Complexity|
 |----------|-----|------|--------------------------|-------------------------|----------|

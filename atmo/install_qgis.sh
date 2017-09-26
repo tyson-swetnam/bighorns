@@ -31,7 +31,7 @@ gpg --export --armor CAEB3DC3BDF7FB45 | sudo apt-key add -
 sudo apt-get install -y --allow-unauthenticated qgis python-qgis 
 
 # Install GRASS-GUI
-sudo add-apt-repository ppa:grass/grass-stable
+sudo add-apt-repository -y ppa:grass/grass-stable
 sudo apt-get install -y --allow-unauthenticated grass grass-dev
 
 # In

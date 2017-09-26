@@ -32,7 +32,7 @@ sudo apt-get install -y --allow-unauthenticated qgis python-qgis
 
 # Install GRASS-GUI
 sudo add-apt-repository ppa:grass/grass-stable
-sudo apt-get install -y --allow-unauthenticated grass
+sudo apt-get install -y --allow-unauthenticated grass grass-dev
 
 # In
 echo deb https://josm.openstreetmap.de/apt alldist universe | sudo tee /etc/apt/sources.list.d/josm.list > /dev/null

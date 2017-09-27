@@ -4,7 +4,7 @@
 # Modified for CyVerse Atmosphere by Tyson Swetnam
 
 # Update and Upgrade
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get -y update && sudo apt-get -y upgrade
 
 # Install non-gis specific tools
 sudo apt-get install -y texlive-extra-utils 
@@ -55,11 +55,6 @@ sudo apt-get install -y \
 # Install Postgres (for PostGIS)
 sudo apt-get install -y postgresql postgresql-contrib
 
-# Install OpenStreetMap
-echo deb https://josm.openstreetmap.de/apt alldist universe | sudo tee /etc/apt/sources.list.d/josm.list > /dev/null
-wget -q https://josm.openstreetmap.de/josm-apt.key -O- | sudo apt-key add -
-sudo apt install -y josm
-
 # Add QGIS and GRASS to sources.list
 sudo sh -c 'echo "deb http://qgis.org/debian xenial main" >> /etc/apt/sources.list'  
 sudo sh -c 'echo "deb-src http://qgis.org/debian xenial main" >> /etc/apt/sources.list' 
@@ -72,35 +67,3 @@ gpg --export --armor CAEB3DC3BDF7FB45 | sudo apt-key add -
 
 # Install QGIS w/ Python
 sudo apt-get install -y --allow-unauthenticated qgis python-qgis 
-
-# Build GRASS 7.2.2 from source
-cd /opt
-wget https://grass.osgeo.org/grass72/source/grass-7.2.2.tar.gz
-tar xzf grass-7.2.2.tar.gz
-cd grass-7.2.2/
-
-# install any additional build dependency packages:
-sudo apt-get build-dep grass
-
-# configure to taste..
-CFLAGS="-O2 -Wall" LDFLAGS="-s" ./configure \
-    --with-openmp \
-    --enable-largefile=yes \
-    --with-nls \
-    --with-cxx \
-    --with-proj-share=/usr/share/proj/ \
-    --with-geos \
-    --with-wxwidgets \
-    --with-cairo \
-    --with-opengl-libs=/usr/include/GL \
-    --with-freetype=yes --with-freetype-includes="/usr/include/freetype2/" \
-    --with-postgres=yes --with-postgres-includes="/usr/include/postgresql" \
-    --with-sqlite=yes \
-    --with-mysql=yes --with-mysql-includes="/usr/include/mysql" \
-    --with-odbc=no \
-     2>&1 | tee config_log.txt
-
-# build using 4 CPU cores
-time make -j 4 2>&1 | tee build_log.txt
-
-sudo make install

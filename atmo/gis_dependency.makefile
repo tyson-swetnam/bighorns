@@ -61,8 +61,8 @@ $(TARGET)/lib/gdalplugins/gdal_GRASS.so: $(TARGET)/bin/grass72 $(TARGET)/bin/gda
 	 && wget $(WGET_FLAGS) http://download.osgeo.org/gdal/2.1.3/gdal-grass-2.1.3.tar.gz \
 	 && tar xzf gdal-grass-2.1.3.tar.gz \
 	 && cd gdal-grass-2.1.3 \
-	 && export LDFLAGS="-L$(TARGET)/grass-7.2.1/lib" \
-	 && ./configure --with-gdal=$(TARGET)/bin/gdal-config --with-grass=$(TARGET)/grass-7.2.1 --prefix=$(TARGET) \
+	 && export LDFLAGS="-L$(TARGET)/grass-7.2.2/lib" \
+	 && ./configure --with-gdal=$(TARGET)/bin/gdal-config --with-grass=$(TARGET)/grass-7.2.2 --prefix=$(TARGET) \
 	 && make \
 	 && make install)
 

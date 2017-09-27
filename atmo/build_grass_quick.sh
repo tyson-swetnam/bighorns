@@ -5,6 +5,15 @@ sudo apt-get update && sudo apt-get upgrade
 # install build dependency packages:
 sudo apt-get build-dep grass
 
+# Install binary PROJ GEOS & GDAL 
+sudo apt-get install libproj-dev \
+	proj-data \
+	proj-bin \
+	libgeos-dev \
+	libgdal-dev \
+	python-gdal \
+	gdal-bin
+
 wget -nv --no-check-certificate https://grass.osgeo.org/grass72/source/grass-7.2.2.tar.gz \
 	 && tar xzf grass-7.2.2.tar.gz \
 	 && cd grass-7.2.2 \

@@ -76,11 +76,8 @@ wx3.0-headers \
 wx-common \
 zlib1g-dev \
 
+# Run Makefile
 sudo make -f gis_dependency.makefile
-
-cd /opt
-sudo mkdir gis
-cd gis
 
 echo "Updating library paths"
 cd /etc/ld.so.conf.d
@@ -88,14 +85,6 @@ echo "/opt/gis/lib" >> gis.conf
 echo "/opt/gis/lib64" >> gis.conf
 echo "/opt/gis/grass-7.2.2/lib" >grass.conf
 ldconfig
-
-# Build GRASS 7.2.2 from source
-sudo wget https://grass.osgeo.org/grass72/source/grass-7.2.2.tar.gz
-sudo tar xzf grass-7.2.2.tar.gz
-cd grass-7.2.2/
-
-# install any additional build dependency packages:
-sudo apt-get build-dep grass
 
 # environment
 GISBASE=/opt/gis/grass-7.2.2

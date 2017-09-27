@@ -7,7 +7,6 @@
 sudo apt-get update && sudo apt-get upgrade
 
 # Install non-gis specific tools
-sudo apt-get install -y guake # guake for retro bash shell dropdown
 sudo apt-get install -y texlive-extra-utils 
 sudo apt-get install -y software-properties-common # to ease adding new ppas
 sudo apt-get install -y libudunits2-dev # udunits2
@@ -16,7 +15,7 @@ sudo apt-get install -y libudunits2-dev # udunits2
 # Add Ubuntu GIS repos
 sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
 
-# this is a single command, please copy-paste it entirely into the terminal:
+# GRASS Dependencies
 sudo apt-get install -y \
   build-essential \
   flex make bison gcc libgcc1 g++ cmake ccache \
@@ -61,7 +60,7 @@ echo deb https://josm.openstreetmap.de/apt alldist universe | sudo tee /etc/apt/
 wget -q https://josm.openstreetmap.de/josm-apt.key -O- | sudo apt-key add -
 sudo apt install -y josm
 
-# Add QGIS to sources.list
+# Add QGIS and GRASS to sources.list
 sudo sh -c 'echo "deb http://qgis.org/debian xenial main" >> /etc/apt/sources.list'  
 sudo sh -c 'echo "deb-src http://qgis.org/debian xenial main" >> /etc/apt/sources.list' 
 sudo sh -c 'echo "deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu xenial main" >> /etc/apt/sources.list'
@@ -74,19 +73,18 @@ gpg --export --armor CAEB3DC3BDF7FB45 | sudo apt-key add -
 # Install QGIS w/ Python
 sudo apt-get install -y --allow-unauthenticated qgis python-qgis 
 
-# Build GRASS from Source
-
+# Build GRASS 7.2.2 from source
 cd /opt
 wget https://grass.osgeo.org/grass72/source/grass-7.2.2.tar.gz
 tar xzf grass-7.2.2.tar.gz
 cd grass-7.2.2/
 
-# install build dependency packages:
+# install any additional build dependency packages:
 sudo apt-get build-dep grass
 
 # configure to taste..
 CFLAGS="-O2 -Wall" LDFLAGS="-s" ./configure \
-    --with-openmp
+    --with-openmp \
     --enable-largefile=yes \
     --with-nls \
     --with-cxx \

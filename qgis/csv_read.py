@@ -25,5 +25,26 @@ with open('${PWD}/CPNWR_DBS_Locs.csv') as csvfile:
 
 # Sample each row by its corresponding solar radiation raster
 
-for x in cases:
-    r.out.xyz 
+from osgeo import gdal,ogr
+import struct
+
+src_filename = '~/bighorns/%s_%s_globrad.tif' % (day,hour)
+shp_filename = '/tmp/test.shp'
+
+src_ds=gdal.Open(src_filename) 
+gt=src_ds.GetGeoTransform()
+rb=src_ds.GetRasterBand(1)
+
+ds=ogr.Open(shp_filename)
+lyr=ds.GetLayer()
+for feat in lyr:
+    geom = feat.GetGeometryRef()
+    mx,my=geom.GetX(), geom.GetY()  #coord in map units
+
+    #Convert from map to pixel coordinates.
+    #Only works for geotransforms with no rotation.
+    px = int((mx - gt[0]) / gt[1]) #x pixel
+    py = int((my - gt[3]) / gt[5]) #y pixel
+
+    intval=rb.ReadAsArray(px,py,1,1)
+    print intval[0]  #intval is a numpy array, length=1 as we only asked for 1 pixel value

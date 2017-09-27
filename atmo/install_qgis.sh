@@ -26,4 +26,4 @@ gpg --export --armor CAEB3DC3BDF7FB45 | sudo apt-key add -
 
 # Install QGIS w/ Python
 sudo apt-get update
-sudo apt-get install -y qgis python-qgis qgis-plugin-grass
+sudo apt-get install -y --allow-unauthenticated qgis python-qgis qgis-plugin-grass

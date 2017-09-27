@@ -83,7 +83,7 @@ echo "Updating library paths"
 cd /etc/ld.so.conf.d
 echo "/opt/gis/lib" >> gis.conf
 echo "/opt/gis/lib64" >> gis.conf
-echo "/opt/gis/grass-7.2.2/lib" >grass.conf
+echo "/opt/gis/grass-7.2.2/lib" >> grass.conf
 ldconfig
 
 # environment

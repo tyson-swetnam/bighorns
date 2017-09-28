@@ -10,7 +10,10 @@ import processing,math,os,sys
 
 #  User must set working directory and the filename of the DEM here before executing run
 # Set the working directory for the input data
-input_Dir = {PWD}
+
+input_Dir = '~/Downloads/bighorns/'
+
+hourly_rsun_Dir = '~/Downloads/bighorns/hourly/'
 
 # Set the output directory for the products
 output_Dir = input_Dir + '/hand_run/'
@@ -44,4 +47,16 @@ name = demLayer.name()
 print name
 bands = demLayer.bandCount()
 print bands
+
+# Slope layer
+degslopeLayer = QgsRasterLayer(os.path.join(input_Dir,'slope_dec.tif'), "Degrees_Slope")
+if not degslopeLayer.isValid(): print "Slope (decimal degrees) Layer failed to load!"
+# Load raster layer into canvas
+QgsMapLayerRegistry.instance().addMapLayer(degslopeLayer)
+
+# Aspect layer
+degaspectLayer = QgsRasterLayer(os.path.join(input_Dir,'aspect_dec.tif'), "Degrees_Aspect")
+if not degaspectLayer.isValid(): print "Aspect (decimal degrees) Layer failed to load!"
+# Load raster layer into canvas
+QgsMapLayerRegistry.instance().addMapLayer(degaspectLayer)
 

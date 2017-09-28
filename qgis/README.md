@@ -14,9 +14,12 @@ I will then run the r.out.xyz with an $X $Y $DAY $HOUR wildcard to select the lo
 
 The results will be written to an output CSV file.
 
+# Data
 
-|r.sun|Direct Radiation (daily)|Global Radiation (daily)|Radiation (hourly)|Radiation (monthly)|
-|-----|------------------------|------------------------|------------------|-------------------|
+The outputs were generated using GRASS r.sun and r.sun.hourly
+
+|r.sun|Direct Beam Radiation (daily)|Global Radiation (daily)|Global Radiation (monthly)|Daily hours| Monthly hours|
+|-----|-----------------------------|------------------------|--------------------------|-----------|--------------|
 |Units| w m2 | | | | |
 
 

@@ -7,7 +7,7 @@ def main(elevation):
     # compute slope and aspect for r.sun
     Module('r.slope.aspect', elevation=elevation, aspect='aspect', slope='slope', overwrite=True)
     # initialize an empty queue and list
-    queue = ParallelModuleQueue(nprocs=16)
+    queue = ParallelModuleQueue(nprocs=44)
     sun_name = 'sun_day{}_t{}'
     # set computational region
     Module('g.region', raster=elevation)

@@ -1,27 +1,57 @@
 import csv
 
-# Load .csv and create arrays
+gps_locations = csv.reader(open("/home/tyson_swetnam/Downloads/bighorns/CPNWR_DBS_Locs.csv"), delimiter=",")
 
-with open('${PWD}/CPNWR_DBS_Locs.csv') as csvfile:
-    readCSV = csv.reader(csvfile, delimiter=',')
-    cases = []
-    lats = []
-    longs = []
-    day = []
-    hours = []
-    
-    for row in readCSV:
-        case = row[0]
-        lat = row[8]
-        long = row[9]
-        julian = row[13]
-        hour = row[12]
+header = gps_locations.next()
 
-        cases.append(case)
-        lats.append(lat)
-        longs.append(long)
-        day.append(julian)
-        hours.append(hour)
+print(header)
+
+latIndex = header.index('lat')
+longIndex = header.index('long')
+hourIndex = header.index('hour')
+julianIndex = header.index("julian")
+
+coordList = []
+
+for row in gps_locations:
+	lat = row[latIndex]
+	long = row[longIndex]
+	hour = row[hourIndex]
+	julian = row[julianIndex]
+	coordList.append([lat,long])
+
+from osgeo import gdal
+
+driver = gdal.GetDriverByName('GTiff')
+
+###
+
+for julian in gps_locations
+    for hour in gps_locations
+
+filename = '~/bighorns/beam_rad_%s_day%s.tif' % (hour, julian) 
+dataset = gdal.Open(filename)
+band = dataset.GetRasterBand(1)
+
+cols = dataset.RasterXSize
+rows = dataset.RasterYSize
+
+transform = dataset.GetGeoTransform()
+
+xOrigin = transform[0]
+yOrigin = transform[3]
+pixelWidth = transform[1]
+pixelHeight = -transform[5]
+
+data = band.ReadAsArray(0, 0, cols, rows)
+
+points_list = [ ] #list of X,Y coordinates
+
+for point in coordList:
+    col = int((point[0] - xOrigin) / pixelWidth)
+    row = int((yOrigin - point[1] ) / pixelHeight)
+
+    print row,col, data[row][col]
 
 # Sample each row by its corresponding solar radiation raster
 

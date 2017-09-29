@@ -60,3 +60,10 @@ if not degaspectLayer.isValid(): print "Aspect (decimal degrees) Layer failed to
 # Load raster layer into canvas
 QgsMapLayerRegistry.instance().addMapLayer(degaspectLayer)
 
+# Importing collar GPS data
+
+gps_locations = csv.reader(open("/home/tyson_swetnam/Downloads/bighorns/CPNWR_DBS_Locs.csv"), delimiter=",")
+gps_header = gps_locations.next() # header names
+print(gps_header)
+
+# Sample 

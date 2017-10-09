@@ -1,6 +1,9 @@
 import csv
 
-gps_locations = csv.reader(open("~/Downloads/bighorns/CPNWR_DBS_Locs.csv"), delimiter=",")
+
+input_Dir = $PWD
+
+gps_locations = csv.reader(open("/home/tswetnam/Downloads/bighorns/CPNWR_DBS_Locs.csv"), delimiter=",")
 
 header = gps_locations.next()
 
@@ -20,45 +23,53 @@ for row in gps_locations:
 	julian = row[julianIndex]
 	coordList.append([lat,long])
 
+# Prepare to import rasters	
 from osgeo import gdal
+format = "GTiff"
+driver = gdal.GetDriverByName( format )
 
-driver = gdal.GetDriverByName('GTiff')
 
-###
 
-for julian in gps_locations
-    for hour in gps_locations
+for julian in gps_locations:
+    for hour in gps_locations:
+	# Flush data from memory
+	dst_ds = None
+	src_ds = None
+	# load .tif
+	beam_dst_ds = os.path.join(input_Dir,'beam_rad_%s_day%s.tif') % (hour, julian)
+	beam_dst_dsLayer = QgsRasterLayer(beam_dst_ds, "beam_%s_day%s") % (hour, julian)
+			  
+# Loop through the .csv file and sample rasters by their cooresponding hour day
+	
+	beam_%s_day%s = '/home/tswetnam/Downloads/bighorns/beam_rad_%s_day%s.tif' % (hour, julian, hour, julian) 
+	beam_data_%s_day%s = gdal.Open(beam_%s_day%s) % (hour, julian, hour, julian)
+	beam_band = beam_data_%s_day%s.GetRasterBand(1) % (hour, julian)
 
-filename = '~/bighorns/beam_rad_%s_day%s.tif' % (hour, julian) 
-dataset = gdal.Open(filename)
-band = dataset.GetRasterBand(1)
+	cols = beam_data_%s_day%s.RasterXSize % (hour, julian)
+	rows = beam_data_%s_day%s.RasterYSize % (hour, julian)
 
-cols = dataset.RasterXSize
-rows = dataset.RasterYSize
+	beam_transform = beam_data_%s_day%s.GetGeoTransform() % (hour, julian)
 
-transform = dataset.GetGeoTransform()
+	xOrigin = beam_transform[0]
+	yOrigin = beam_transform[3]
+	pixelWidth = beam_transform[1]
+	pixelHeight = -beam_transform[5]
 
-xOrigin = transform[0]
-yOrigin = transform[3]
-pixelWidth = transform[1]
-pixelHeight = -transform[5]
+	data = beam_%s_day%s_band.ReadAsArray(0, 0, cols, rows) % (hour, julian)
 
-data = band.ReadAsArray(0, 0, cols, rows)
+	points_list = [ ] #list of X,Y coordinates
+		for point in coordList:
+		    col = int((point[0] - xOrigin) / pixelWidth)
+	    		row = int((yOrigin - point[1] ) / pixelHeight)
 
-points_list = [ ] #list of X,Y coordinates
-
-for point in coordList:
-    col = int((point[0] - xOrigin) / pixelWidth)
-    row = int((yOrigin - point[1] ) / pixelHeight)
-
-    print row,col, data[row][col]
+	    		print row,col, data[row][col]	
 
 # Sample each row by its corresponding solar radiation raster
 
 from osgeo import gdal,ogr
 import struct
 
-src_filename = '~/bighorns/%s_%s_globrad.tif' % (day,hour)
+src_filename = 'home/tswetnam/Downloads/bighorns/hand_run/beam_rad_%s_day%s.tif' % (day,hour)
 shp_filename = '/tmp/test.shp'
 
 src_ds=gdal.Open(src_filename) 

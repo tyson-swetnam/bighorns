@@ -1,6 +1,6 @@
 import csv
 
-gps_locations = csv.reader(open("/home/tyson_swetnam/Downloads/bighorns/CPNWR_DBS_Locs.csv"), delimiter=",")
+gps_locations = csv.reader(open("~/Downloads/bighorns/CPNWR_DBS_Locs.csv"), delimiter=",")
 
 header = gps_locations.next()
 

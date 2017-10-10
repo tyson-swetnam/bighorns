@@ -1,12 +1,13 @@
 import csv, os
 
 # Set input file directory
-input_Dir = /home/tswetnam/Downloads/bighorns/
+input_Dir = '/vol_d/bighorns/hand_run/'
 
-gps_locations = csv.reader(open(input_Dir,"CPNWR_DBS_Locs.csv"), delimiter=",")
+gps_locations = csv.reader('/vol_c/bighorns/CPNWR_DBS_Locs.csv', delimiter=",")
 header = gps_locations.next()
 print(header)
 
+caseIndex = header.index('case')
 latIndex = header.index('lat')
 longIndex = header.index('long')
 hourIndex = header.index('hour')
@@ -15,11 +16,12 @@ julianIndex = header.index("julian")
 coordList = []
 
 for row in gps_locations:
+	case = row[caseIndex]
 	lat = row[latIndex]
 	long = row[longIndex]
 	hour = row[hourIndex]
 	julian = row[julianIndex]
-	coordList.append([lat,long])
+	coordList.append([case,lat,long,hour,julian])
 
 # Prepare to import rasters	
 from osgeo import gdal

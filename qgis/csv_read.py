@@ -44,7 +44,11 @@ format = "GTiff"
 driver = gdal.GetDriverByName( format )
 
 for row in coord_data:
-    case, lat, lon, hour, julian = row
+    case = row[0]
+    lat = float(row[1])
+    lon = float(row[2])
+    hour = row[3]
+    julian = row[4]
     if int(hour) <= 5: 
         print "Observation is %s:00 hours before sunrise, writing null value for radiation on day %s" % (hour, julian)
         coords_new.writerow([case, lat, lon, hour, julian, '0', '0'])
@@ -77,13 +81,10 @@ for row in coord_data:
         pixelWidth = beam_transform[1]
         pixelHeight = -beam_transform[5]
         data_beam = beam_band.ReadAsArray(0, 0, cols, rows) 
-        for ob in coord_data:
-            obs1 = float(ob[1])
-            row = int((yOrigin - obs1) / pixelHeight)
-            obs2 = float(ob[2])
-            col = int((obs2 - xOrigin) / pixelWidth)
-            coords_new.writerow([case, lat, lon, hour, julian, data_glob[row][col], data_beam[row][col]])
-        	# Load Layers into QGIS
-		# glob_dst_dsLayer = QgsRasterLayer(glob_dst_ds, 'glob_rad_%s_day%s' % (hour, julian))
-        	# QgsMapLayerRegistry.instance().addMapLayer(glob_dst_dsLayer)
-        	# if not glob_dst_dsLayer.isValid(): print "glob_rad_%s_day%s.tif layer not found" % (hour, julian)
+        row = int((yOrigin - lat) / pixelHeight)
+        col = int((lon - xOrigin) / pixelWidth)
+        coords_new.writerow([case, lat, lon, hour, julian, data_glob[row][col], data_beam[row][col]])
+        # Load Layers into QGIS
+        # glob_dst_dsLayer = QgsRasterLayer(glob_dst_ds, 'glob_rad_%s_day%s' % (hour, julian))
+        # QgsMapLayerRegistry.instance().addMapLayer(glob_dst_dsLayer)
+        # if not glob_dst_dsLayer.isValid(): print "glob_rad_%s_day%s.tif layer not found" % (hour, julian)

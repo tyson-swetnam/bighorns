@@ -1,8 +1,8 @@
 # QGIS
 
-In QGIS I used the [Point Sampling Tool](https://plugins.qgis.org/plugins/pointsamplingtool/) to sample the spatial locations of the ~60,000 sheep observations
+In QGIS I used the [Point Sampling Tool](https://plugins.qgis.org/plugins/pointsamplingtool/) to sample geographic features for the ~60,000 observations. In order to sample solar radiation models by hourly output I wrote a python shell script to loop through the dataset and sample each observation for each hour of each particular day.
 
-To calculate the heat load index I am using my `Sol` distributed computing method as well as a r.sun.hourly scripting.
+To help calculate the heat load index I am using my `Sol` distributed computing method as well as a r.sun.hourly scripting.
 
 I will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/)  each GPS collar location for the monthly summed global irradiation and hours of insolation, in addition to calculating the heat index of the site, and topographic metrics
 
@@ -16,11 +16,11 @@ The results will be written to an output CSV file.
 
 # Data
 
-The outputs were generated using GRASS r.sun and r.sun.hourly
+The outputs were generated using GRASS r.sun.mp or r.sun.hourly
 
 |r.sun|Direct Beam Radiation (daily)|Global Radiation (daily)|Global Radiation (monthly)|Daily hours| Monthly hours|
 |-----|-----------------------------|------------------------|--------------------------|-----------|--------------|
-|Units| w m2 | | | | |
+|Units| w m<sup>2<sup> | w m<sup>2<sup> | w m<sup>2<sup> | hours | hours |
 
 
 |Topography|Slope|Aspect|Topographic Position Index|Topographic Wetness Index|Complexity|

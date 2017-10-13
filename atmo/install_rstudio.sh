@@ -46,8 +46,8 @@ echo "install RStudio-Server from the web"
 
 sudo apt-get install -f -y
 sudo apt-get install -y gdebi-core
-wget https://download2.rstudio.org/rstudio-server-1.0.153-amd64.deb
-sudo gdebi rstudio-server-1.0.153-amd64.deb
+wget https://download2.rstudio.org/rstudio-server-1.1.383-amd64.deb
+sudo gdebi rstudio-server-1.1.383-amd64.deb
 # sudo wget https://s3.amazonaws.com/rstudio-dailybuilds/rstudio-server-1.1.339-amd64.deb 
 # sudo gdebi -n rstudio-server-1.1.339-amd64.deb
 # use daily build to get rmarkdown & latest goodies

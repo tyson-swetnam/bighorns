@@ -37,7 +37,7 @@ CFLAGS="-O2 -Wall" LDFLAGS="-s" ./configure \
     --with-odbc=no \
      2>&1 | tee config_log.txt
 
- # build using 4 CPU cores
+ # build using nproc CPU cores
  NPROC=$(nproc)
  time sudo make -j $NPROC 2>&1 | tee build_log.txt
 

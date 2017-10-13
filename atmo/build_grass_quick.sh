@@ -6,7 +6,7 @@ sudo apt-get update && sudo apt-get upgrade
 sudo apt-get build-dep grass
 
 # Install binary PROJ GEOS & GDAL 
-sudo apt-get install libproj-dev \
+sudo apt-get install -y libproj-dev \
 	proj-data \
 	proj-bin \
 	libgeos-dev \
@@ -38,6 +38,7 @@ CFLAGS="-O2 -Wall" LDFLAGS="-s" ./configure \
      2>&1 | tee config_log.txt
 
  # build using 4 CPU cores
- time sudo make -j 4 2>&1 | tee build_log.txt
+ NPROC=$(nproc)
+ time sudo make -j $NPROC 2>&1 | tee build_log.txt
 
  sudo make install

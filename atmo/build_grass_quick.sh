@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get -y update && sudo apt-get -y upgrade
 
 # install build dependency packages:
 sudo apt-get build-dep -y grass

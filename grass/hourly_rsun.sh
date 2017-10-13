@@ -21,3 +21,7 @@ for day in {1..365} # Note this loop will run from January 1 to December 31
         r.out.gdal createopt="COMPRESS=LZW" -c -m --overwrite --verbose input=beam_rad_${hour}_day${day} output=beam_rad_${hour}_day${day}.tif format=GTiff type=Float64
     done
   done
+
+# Leap year day
+# in the directory with the data copy day 365 and rename 366
+# for filename in *day365.tif; do echo cp \"$filename\" \"${filename//5/6}\"; done

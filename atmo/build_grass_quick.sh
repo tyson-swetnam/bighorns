@@ -3,7 +3,7 @@
 sudo apt-get update && sudo apt-get upgrade
 
 # install build dependency packages:
-sudo apt-get build-dep grass
+sudo apt-get build-dep -y grass
 
 # Install binary PROJ GEOS & GDAL 
 sudo apt-get install -y libproj-dev \

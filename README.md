@@ -1,6 +1,6 @@
 # Contents
 
-AZ Bighorns study in collaboration with NMGFD and New Mexico State University (NMSS), Las Cruces NM.
+AZ Bighorns study in collaboration with NMGFD and New Mexico State University (NMSU), Las Cruces NM.
 
 ## atmo
 
@@ -15,3 +15,6 @@ Python scripts for executing computations in [GRASS 7](https://grass.osgeo.org/)
 ## qgis
 
 Python scripts for executing computation in [QGIS 2.18](http://www.qgis.org/en/site/)
+
+## acknowledgements
+

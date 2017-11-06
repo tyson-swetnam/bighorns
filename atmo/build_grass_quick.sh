@@ -16,7 +16,7 @@ sudo apt-get install -yy  --allow-unauthenticated \
 	gdal-bin
 
 wget -nv --no-check-certificate https://grass.osgeo.org/grass72/source/grass-7.2.2.tar.gz \
-	 && tar -xvzf -C /opt/grass-7.2.2.tar.gz \
+	 && tar -xvzf grass-7.2.2.tar.gz -C /opt \
 	 && cd /opt/grass-7.2.2 \
 
 # configure to taste..

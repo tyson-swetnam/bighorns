@@ -16,8 +16,8 @@ sudo apt-get install -yy  --allow-unauthenticated \
 	gdal-bin
 
 wget -nv --no-check-certificate https://grass.osgeo.org/grass72/source/grass-7.2.2.tar.gz \
-	 && tar xzf grass-7.2.2.tar.gz \
-	 && cd grass-7.2.2 \
+	 && tar -xvzf -C /opt/grass-7.2.2.tar.gz \
+	 && cd /opt/grass-7.2.2 \
 
 # configure to taste..
 CFLAGS="-O2 -Wall" LDFLAGS="-s" ./configure \

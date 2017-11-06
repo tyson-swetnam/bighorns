@@ -7,7 +7,8 @@ sudo apt-get build-dep -y grass
 
 # Install binary PROJ GEOS & GDAL 
 sudo apt-get install -yy  --allow-unauthenticated \
-        libproj-dev \
+        flex \
+	libproj-dev \
 	proj-data \
 	proj-bin \
 	libgeos-dev \

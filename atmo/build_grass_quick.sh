@@ -1,9 +1,9 @@
 #!/bin/bash
 
-sudo apt-get -y update && sudo apt-get -y upgrade
+sudo apt-get -y update
 
 # install build dependency packages:
-sudo apt-get build-dep -y grass
+sudo apt-get build-dep -yy --allow-unauthenticated grass
 
 # Install binary PROJ GEOS & GDAL 
 sudo apt-get install -yy  --allow-unauthenticated \

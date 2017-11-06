@@ -6,7 +6,8 @@ sudo apt-get -y update && sudo apt-get -y upgrade
 sudo apt-get build-dep -y grass
 
 # Install binary PROJ GEOS & GDAL 
-sudo apt-get install -y libproj-dev \
+sudo apt-get install -yy  --allow-unauthenticated \
+        libproj-dev \
 	proj-data \
 	proj-bin \
 	libgeos-dev \

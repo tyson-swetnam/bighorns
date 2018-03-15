@@ -2,6 +2,10 @@
 
 AZ Bighorns study in collaboration with NMGFD and New Mexico State University (NMSU), Las Cruces NM.
 
+What are the conditions that the sheep are selecting at that point in time and place?
+
+E.g. elevation, slope, aspect, temperature, shading.
+
 ## atmo
 
 Scripts for CyVerse [Atmosphere](atmo.cyverse.org) virtual machine software installation 

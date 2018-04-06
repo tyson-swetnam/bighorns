@@ -18,49 +18,34 @@ git clone https://github.com/tyson-swetnam/bighorns.git
 cd bighorns/atmo
 ```
 
-# iCommands Setup 
+# iRODS iCommands Setup 
 
-[CyVerse Tutorial](https://pods.iplantcollaborative.org/wiki/display/DS/Setting+Up+iCommands)
+We are storing some data on the CyVerse DataStore
 
-To connect to the CyVerse Data Store from a Jetstream or Atmosphere VM without iCommands installed:
+In order to access the DataStore from a non-Atmosphere VM, you need to install iRODS iCommands.
+
+[iRODS](https://irods.org/)
+
+Ubuntu Linux Installation instructions:
 
 ```
-wget ftp://ftp.renci.org/pub/irods/releases/4.1.11/ubuntu14/irods-icommands-4.1.11-ubuntu14-x86_64.deb
-```
+wget -qO - https://packages.irods.org/irods-signing-key.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://packages.irods.org/apt/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/renci-irods.list
+sudo apt-get update
 
-```
-dpkg -i irods-icommands-4.1.11-ubuntu14-x86_64.deb
+sudo apt-get install irods-icommands
 ```
 
 Connect to the CyVerse Datastore:
 
 ```
-{
-    "irods_host": "FULLY.QUALIFIED.DOMAIN.NAME",
-    "irods_port": 1247,
-    "irods_default_resource": "demoResc",
-    "irods_home": "/tempZone/home/USERNAME",
-    "irods_cwd": "/tempZone/home/USERNAME",
-    "irods_user_name": "USERNAME",
-    "irods_zone_name": "tempZone",
-    "irods_client_server_negotiation": "request_server_negotiation",
-    "irods_client_server_policy": "CS_NEG_REFUSE",
-    "irods_encryption_key_size": 32,
-    "irods_encryption_salt_size": 8,
-    "irods_encryption_num_hash_rounds": 16,
-    "irods_encryption_algorithm": "AES-256-CBC",
-    "irods_default_hash_scheme": "SHA256",
-    "irods_match_hash_policy": "compatible"
-}
-
-
 Processing triggers for man-db (2.7.5-1) ...
 tswetnam@js-168-124:~/Downloads$ iinit
 One or more fields in your iRODS environment file (irods_environment.json) are
 missing; please enter them.
 Enter the host name (DNS) of the server to connect to: data.cyverse.org
 Enter the port number: 1247
-Enter your irods user name: tyson_swetnam
+Enter your irods user name: $USER
 Enter your irods zone: iplant
 Those values will be added to your environment file (for use by
 other iCommands) if the login succeeds.
@@ -68,18 +53,49 @@ other iCommands) if the login succeeds.
 Enter your current iRODS password:
 ```
 
-# GRASS
+# Install Singularity
 
-to install GRASS natively (without Singularity container) 
-
-```
-. build_grass_quick.sh
-```
-
-# QGIS
-
-to install QGIS natively
+On an Atmo VM, there is an `ez` command for installing the latest version of Singularity:
 
 ```
-. install_qgis.sh
+ezs
 ```
+
+Pull Tyson's OSGEO Singularity container from Singularity Hub
+
+```
+singularity pull --name osgeo.simg shub://tyson-swetnam/osgeo-singularity
+```
+
+Run QGIS graphically
+
+```
+singularity exec osgeo.simg qgis
+```
+
+Run GRASS 7.4 graphically
+
+```
+singularity exec osgeo.simg grass74
+```
+
+Run CLI
+
+```
+singularity shell osgeo.simg
+```
+
+# Install Docker
+
+```
+ezd
+```
+
+```
+sudo usermod -aG docker $USER
+```
+
+```
+docker run -d -p 8787:8787 rocker/geospatial
+```
+

@@ -22,5 +22,17 @@ What are the conditions that the sheep are selecting at that point in time and p
 
 Scripts for launching CyVerse [Atmosphere](atmo.cyverse.org) virtual machine software installation 
 
+## grass
+
+Scripts run in GRASS CLI
+
+## qgis
+
+Scripts run in QGIS
+
+## rstudio
+
+RStudio Server .RMD files
+
 ## acknowledgements
 

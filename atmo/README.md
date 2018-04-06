@@ -1,6 +1,6 @@
 # CyVerse Atmosphere
 
-Creating VMs on Atmosphere is easy
+Creating VMs on Atmosphere is `ez`
 
 Select a featured image with Ubuntu 16
 
@@ -21,7 +21,7 @@ sudo apt-get update
 ```
 
 ```
-ezj -3
+ezj
 ```
 
 Change ownership of the `/home/anaconda3/` directory

@@ -30,7 +30,7 @@ Change ownership of the `/home/anaconda3/` directory
 sudo chown ${USER}:iplant-everyone /home/anaconda3 -R
 ```
 
-#### Install JupyterLab(Alpha)
+#### JupyterLab
 
 ```
 conda install -c conda-forge jupyterlab
@@ -39,8 +39,8 @@ conda install -c conda-forge jupyterlab
 Starting Jupyter Lab
 
 ```
-PUBLIC_IP=$(curl -s https://4.ifcfg.me/)
-jupyter lab --no-browser --ip=0.0.0.0 2>&1 | sed s/0.0.0.0/$PUBLIC_IP/g
+PUBLIC_IP=$(curl ifconfig.co)
+jupyter lab --no-browser --ip=$PUBLIC_IP 2>&1 | sed s/0.0.0.0/$PUBLIC_IP/g
 ```
 
 ### Install Docker
@@ -59,37 +59,68 @@ sudo usermod -aG docker $USER
 ```
 Log out of terminal and log back into the VM
 
-#### Install Docker Compose 
-
-Install Pip
+#### Run RStudio-Server
 
 ```
-sudo wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py 
+docker run -d -p 8787:8787 rocker/geospatial
 ```
 
+Open a new terminal to the VM, create an SSH tunnel
+
 ```
-sudo pip install docker-compose
+ssh -nNT -L 8787:localhost:8787 $USER@<IPADDRESS OF VM> 
 ```
 
+Open a new browser tab, and type
+
+```
+localhost:8787
+```
+RStudio username: `rstudio`
+RStudio password: `rstudio`
+ 
 ### Install Singularity
 
 ```
 ezs
 ```
 
-#### Install Singularity container with GRASS and CCTtools Makeflow
+#### Install Singularity container with QGIS, GRASS, and CCTtools Makeflow
 
 I've built a container which has GDAL, GRASS, SAGA-GIS pre-installed, it also has Makeflow and can run the entire r.sun calculation in parallel across additional worker nodes.
 
+SSH into the VM with the `-X` flag to allow X11 remote desktop display.
+
 ```
-singularity pull shub://tyson-swetnam/eemt-singularity-dev:master
-#rename container (shorten name)
-mv tyson-swetnam-eemt-singularity-dev-master.img eemt-current.img
+ssh -X $USER@<IPADDRESS OF VM>
 ```
 
 ```
-singularity shell eemt-current.img
+singularity pull --name osgeo-singularity.simg shub://tyson-swetnam/osgeo-singularity
+
+```
+
+Run the container as a CLI
+
+```
+singularity shell osgeo-singularity.simg
+```
+
+Run the container as a GUI
+
+```
+# Open QGIS on your local machine
+singularity exec osgeo-singularity.simg qgis
+```
+
+```
+# Open GRASS on your local machine
+singularity exec osgeo-singularity.simg grass74
+```
+
+```
+# Open SAGA-GIS on your local machine
+singularity exec osgeo-singularity.simg saga_gui
 ```
 
 

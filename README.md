@@ -20,7 +20,7 @@ What are the conditions that the sheep are selecting at that point in time and p
 
 ## atmo
 
-Scripts for launching CyVerse [Atmosphere](atmo.cyverse.org) virtual machine software installation 
+Scripts for launching CyVerse [Atmosphere](https://atmo.cyverse.org) cloud, with software installation instructions.
 
 ## grass
 

@@ -24,17 +24,13 @@ sudo apt-get update
 ezj
 ```
 
-Change ownership of the `/home/anaconda3/` directory
+Change ownership of the `/opt/anaconda3/` directory
 
 ```
-sudo chown ${USER}:iplant-everyone /home/anaconda3 -R
+sudo chown ${USER}:iplant-everyone /opt/anaconda3 -R
 ```
 
 #### JupyterLab
-
-```
-conda install -c conda-forge jupyterlab
-```
 
 Starting Jupyter Lab
 

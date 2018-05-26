@@ -37,7 +37,7 @@ ezs
 singularity exec --bind /scratch docker://rocker/geospatial:latest 
 ```
 
-Note: I am using the flag `--bind`` to bind in the VM's directory structure `/scratch` directory. 
+Note: I am using the flag `--bind` to bind in the VM's directory structure `/scratch` directory. 
 
 ### Run Singularity container with QGIS, GRASS, SAGA-GIS:
 

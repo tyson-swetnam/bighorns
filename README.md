@@ -12,9 +12,9 @@ Tyson Lee Swetnam <sup>1</sup>*, Jay Gedir <sup>2</sup>
 
 AZ Bighorns study in collaboration with NMGFD and New Mexico State University (NMSU), Las Cruces NM.
 
-The intent of the project is to vertically sample ~60,000 radio collar GPS locations down to their date and hour, by the solar irradiation of the location across an entire year (~5,800 rasters). We also want to calculate heat load of the surface to infer a daily temperature for the site at the time of the GPS ping. 
+The intent is to vertically sample the solar irradiation of locations across an entire year (~5,800 rasters), using ~60,000 radio collar GPS locations, by the date and hour. We calculate heat load of the surface to infer a local air temperature for the sites at the time of the GPS ping. Sheep locations are compared to an equal number of random locations to establish whether their patterns of movement are driven by topographic complexity. 
 
-What are the conditions that the sheep are selecting at that point in time and place? E.g. elevation, slope, aspect, temperature, shading.
+Why are the sheep are selecting a location in time: elevation, slope, aspect, temperature, local shading?
 
 # Repository roadmap
 

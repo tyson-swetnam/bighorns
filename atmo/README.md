@@ -23,44 +23,25 @@ git clone https://tyson-swetnam/bighorns
 cd bighorns
 ```
 
-## Install Docker
-
-```
-ezd
-sudo usermod -aG docker $USER
-```
-
-[Rocker's Docker Containers for R](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
-
-Here I'm using Rocker's geospatial RStudio-Server image:
-
-```
-docker pull rocker/geospatial:latest
-```
-
-I'm going to start the container detached `-d` to keep it alive when my terminal window is closed:
-
-```
-docker run -d -p 8787:8787 rocker/geospatial:latest
-```
-
 ## Install Singularity
 
 ```
 ezs
 ```
 
-Run Rocker Geospatial Docker in Singularity:
+[Rocker's Docker Containers for R](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
+
+### Run Rocker Geospatial Docker with Singularity:
 
 ```
-singularity run --bind /scratch docker://rocker/geospatial:latest
+singularity exec --bind /scratch docker://rocker/geospatial:latest 
 ```
 
 Note: I am using the flag `--bind`` to bind in the VM's directory structure `/scratch` directory. 
 
-Pull Singularity container with QGIS, GRASS, SAGA-GIS
+### Run Singularity container with QGIS, GRASS, SAGA-GIS:
 
 ```
-singularity pull shub://tyson-swetnam/osgeo-singularity
+singularity exec --bind /scratch shub://tyson-swetnam/osgeo-singularity qgis
 ```
 

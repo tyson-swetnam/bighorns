@@ -30,7 +30,7 @@ ezd
 sudo usermod -aG docker $USER
 ```
 
-Pull [Rocker's Docker Containers for R](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
+[Rocker's Docker Containers for R](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
 
 Here I'm using Rocker's geospatial RStudio-Server image:
 
@@ -49,6 +49,14 @@ docker run -d -p 8787:8787 rocker/geospatial:latest
 ```
 ezs
 ```
+
+Run Rocker Geospatial Docker in Singularity:
+
+```
+singularity run --bind /scratch docker://rocker/geospatial:latest
+```
+
+Note: I am using the flag `--bind`` to bind in the VM's directory structure `/scratch` directory. 
 
 Pull Singularity container with QGIS, GRASS, SAGA-GIS
 

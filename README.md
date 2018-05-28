@@ -34,5 +34,9 @@ Scripts run in QGIS
 
 RStudio Server .RMD files
 
+## Dockerfile
+
+I have ported the [Rocker/Geospatial](https://hub.docker.com/r/rocker/geospatial/) Dockerfile from DockerHub and added a few more libraries to run our analyses in RStudio-Server.
+
 ## acknowledgements
 

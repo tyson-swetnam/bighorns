@@ -1,0 +1,221 @@
+---
+title: "Bighorns"
+author: "Tyson Lee Swetnam"
+date: "1/21/2018"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Import packages
+
+```{r message=FALSE, warning=FALSE}
+install.packages("PerformanceAnalytics")
+install.packages("lubridate")
+install.packages("dlm")
+
+# devtools depends:
+# apt-get -y build-dep libcurl4-gnutls-dev
+# apt-get -y install libcurl4-gnutls-dev
+install.packages("devtools")
+
+# requires devtoools 
+library(devtools)
+devtools::install_github('hadley/ggplot2')
+
+install_github('sinhrks/ggfortify')
+install.packages("foreign")
+install.packages("truncreg")
+install.packages("boot")
+install.packages("plotly")
+install.packages("dplyr")
+install_github("easyGgplot2", "kassambara")
+```
+
+## Load libraries
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(PerformanceAnalytics)
+library(ggplot2)
+library(lubridate)
+library(plotly)
+library(easyGgplot2)
+library(plyr)
+```
+
+## Import data
+
+This file command uses iRODS to move the data from my datastore, which I've authenticated to on my laptop.
+```{bash}
+#Import project folder to RStudio - if you're seeing this file, your data are not on the RStudio yet.
+# If you run this file inside a container, iRODS will not be installed - you must either install iRODS iCommands, or run this outside the container.
+
+# mkdir -p /home/tyson_swetnam/bighorn
+# cd ~/bighorn
+# iget -KPbfrT --retries 3 -X checkpoint-file /iplant/home/tyson_swetnam/bighorns/CPNWR_DBS_Locs_02Nov17.csv
+# iget -KPbfrT --retries 3 -X checkpoint-file /iplant/home/tyson_swetnam/bighorns/gps_global_beam_flat_temp.csv 
+``` 
+
+## Load data
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+## Import the original data and the r.sun output data
+sheep <- read.csv("/Users/tyson_swetnam/Downloads/bighorns/gps_global_beam_flat_temp.csv")
+original <- read.csv("/Users/tyson_swetnam/Downloads/bighorns/CPNWR_DBS_Locs_02Nov17.csv")
+
+## Convert the dates to an R readable format
+## https://www.r-bloggers.com/date-formats-in-r/ 
+original$asdate <- as.Date(original$date, format = "%m / %d / %Y")
+sheep$asdate <-original[1:60254,]$asdate
+sheep$obs.rndm <- original[1:60254,]$obs.rndm
+sheep$obsrand <-ifelse(sheep$obs.rndm == 0, "random", "observation")
+sheep$week <- week(sheep$asdate)
+sheep$month <- month(sheep$asdate)
+sheep$year <- year(sheep$asdate)
+
+sheep_day <- sheep[sheep$flat_glob > 0,]
+sheep_day$shade <- ifelse(sheep_day$beam == 0,1,0)
+sheep_day$shadow <-ifelse(sheep_day$shade == 0, "sunny", "shadow")
+```
+
+```{r}
+# Simple hourly temperature using cosine
+sheep_day$hourly_temp <- ifelse(sheep_day$hour<9,(((sheep_day$t_min+sheep_day$t_max)/2) * cos(sheep_day$hour *(pi/9)) + (sheep_day$t_min+sheep_day$t_max)/2),(((sheep_day$t_min+sheep_day$t_max)/2) * cos((sheep_day$hour - 10) *(pi/13)) + (sheep_day$t_min+sheep_day$t_max)/2))
+```
+
+Creates summary statement - code taken from: http://journal.sjdm.org/14/141112a/summarySE.r 
+
+```{r}
+## Gives count, mean, standard deviation, standard error of the mean, and confidence interval (default 95%).
+##   data: a data frame.
+##   measurevar: the name of a column that contains the variable to be summariezed
+##   groupvars: a vector containing names of columns that contain grouping variables
+##   na.rm: a boolean that indicates whether to ignore NA's
+##   conf.interval: the percent range of the confidence interval (default is 95%)
+summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+    library(plyr)
+
+    # New version of length which can handle NA's: if na.rm==T, don't count them
+    length2 <- function (x, na.rm=FALSE) {
+        if (na.rm) sum(!is.na(x))
+        else       length(x)
+    }
+
+    # This does the summary. For each group's data frame, return a vector with
+    # N, mean, and sd
+    datac <- ddply(data, groupvars, .drop=.drop,
+      .fun = function(xx, col) {
+        c(N    = length2(xx[[col]], na.rm=na.rm),
+          mean = mean   (xx[[col]], na.rm=na.rm),
+          sd   = sd     (xx[[col]], na.rm=na.rm)
+        )
+      },
+      measurevar
+    )
+
+    # Rename the "mean" column    
+    datac <- rename(datac, c("mean" = measurevar))
+
+    datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+
+    # Confidence interval multiplier for standard error
+    # Calculate t-statistic for confidence interval: 
+    # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+    ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+    datac$ci <- datac$se * ciMult
+    return(datac)
+}
+```
+
+
+```{r}
+
+sheep_day_temp <- group_by(sheep_day, year, julian, hour)
+pd <- position_dodge(0.1)
+# summarySE provides the standard deviation, standard error of the mean, and a (default 95%) confidence interval
+sse_hourly <- summarySE(sheep_day_temp, measurevar="hourly_temp", groupvars=c("julian","hour"))
+sse_hourly
+
+ggplot(sse_hourly, aes(x=hour, y=hourly_temp, colour=julian, group=julian)) + 
+    geom_errorbar(aes(ymin=hourly_temp-ci, ymax=hourly_temp+ci), colour="black", width=.1, position=pd) +
+    geom_line(position=pd, size=0.25) +
+    geom_point(position=pd, size=2)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+hist(sheep_day$week,53)
+hist(sheep_day$week,53)
+```
+
+```{r}
+# Sort the data first:
+d <- with(sheep_day, sheep_day[order(shadow,obsrand),])
+p1 <- ggplot(data=d, aes(x=week, y=shadow, fill=shadow)) + geom_bar(stat="identity") + scale_y_discrete(breaks = c(0,50,150,200,250))
+ggplotly(p1)
+
+```
+
+```{r}
+library(dplyr)
+sheep_day_month <- group_by(sheep_day, month, obs.rndm)
+summarise(sheep_day_month, shadow=sum(shade), sun=sum(shade==0), sun_shade_ratio=shadow/sun)
+sum_stats <- summarise(sheep_day_month, shadow=sum(shade==1), sun=sum(shade==0), sun_shade_ratio=shadow/sun)
+```
+
+
+```{r}
+pd <- position_dodge(0.1)
+# summarySE provides the standard deviation, standard error of the mean, and a (default 95%) confidence interval
+sse_shade <- summarySE(sheep_day_month, measurevar="shade", groupvars=c("month","obs.rndm"))
+sse_shade 
+
+ggplot(sse_shade, aes(x=month, y=shade, colour=obs.rndm, group=obs.rndm)) + 
+    geom_errorbar(aes(ymin=shade-ci, ymax=shade+ci), colour="black", width=.1, position=pd) +
+    geom_line(position=pd, size=0.25) +
+    geom_point(position=pd, size=2)
+```
+
+```{r echo=FALSE}
+
+p1 <- ggplot() +
+  geom_point(data = sheep_day, aes(x=julian,y=global), size = 0.1, color = "red") +
+  facet_wrap(~obsrand) +
+#  geom_point(data = sheep, aes(x=asdate,y=s_beam), size = 0.1, color = "blue") +
+#  geom_smooth(data = sheep, aes(x=asdate,y=s_beam), size = 0.1, span = 0.1, color = "blue") +
+  ggtitle("Solar Hourly") + 
+  xlab("Calendar Date") + ylab("Global Radiation") + geom_hline(yintercept=1, size = 0.1)
+
+ggplotly(p1)
+```
+
+```{r echo=FALSE}
+
+p2 <- ggplot() +
+  geom_point(data = sheep_day, aes(x=julian,y=s_glob), size = 0.1, color = "red") +
+  facet_wrap(~obs.rndm) +
+#  geom_point(data = sheep, aes(x=asdate,y=s_beam), size = 0.1, color = "blue") +
+#  geom_smooth(data = sheep, aes(x=asdate,y=s_beam), size = 0.1, span = 0.1, color = "blue") +
+  ggtitle("Solar Hourly") + 
+  xlab("Calendar Date") + ylab("Global Radiation") + geom_hline(yintercept=1, size = 0.1)
+
+ggplotly(p2)
+```
+
+```{r echo=FALSE}
+
+p1 <- ggplot() +
+  geom_point(data = sheep, aes(x=asdate,y=t_min), size = 0.1, color = "blue") +
+  geom_smooth(data = sheep, aes(x=asdate,y=t_min), size = 0.1, span = 0.1, color = "blue") +
+  geom_point(data = sheep, aes(x=asdate,y=t_max), size = 0.1, color = "blue") +
+  geom_smooth(data = sheep, aes(x=asdate,y=t_max), size = 0.1, span = 0.1, color = "blue") +
+  ggtitle("Temperature Daily") + 
+  xlab("Calendar Date") + ylab("temps (C)") + geom_hline(yintercept=0, size = 0.1)
+
+ggplotly(p1)
+```

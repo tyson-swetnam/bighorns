@@ -43,6 +43,8 @@ Note: I am using the flag `--bind` to bind in the VM's directory structure `/scr
 
 ### Run Singularity container with QGIS, GRASS, SAGA-GIS:
 
+I suggest that you run Singularity from within the Atmosphere Web Desktop. This is because the Web Desktop is faster than X11 remote desktop.
+
 ```
 singularity exec --bind /scratch shub://tyson-swetnam/osgeo-singularity qgis
 ```

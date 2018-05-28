@@ -51,9 +51,7 @@ RUN apt-get update \
     spdep \
     geoR \
     geosphere \
-    ## from bioconductor
-    && R -e "BiocInstaller::biocLite('rhdf5')"
-RUN install2.r --error \
+    # Added Packages
     PerformanceAnalytics \
     boot \
     devtools \
@@ -62,4 +60,6 @@ RUN install2.r --error \
     foreign \
     lubridate \
     plotly \
-    truncreg
+    truncreg \
+    ## from bioconductor
+    && R -e "BiocInstaller::biocLite('rhdf5')"

@@ -6,7 +6,6 @@ MAINTAINER "Tyson Swetnam" tswetnam@cyverse.org
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     lbzip2 \
-    libcurl4-gnutls-dev \
     libfftw3-dev \
     libgdal-dev \
     libgeos-dev \
@@ -23,28 +22,19 @@ RUN apt-get update \
     libsqlite3-dev \
     libssl-dev \
     libudunits2-dev \
-    libxml2-dev \ 
-    build-essential \
     netcdf-bin \
     protobuf-compiler \
     tk-dev \
     unixodbc-dev \
-RUN install2.r --error \
-    PerformanceAnalytics \
+  && install2.r --error \
     RColorBrewer \
     RandomFields \
     RNetCDF \
-    boot \
     classInt \
     deldir \
-    devtools \
-    dlm \
-    dplyr \
-    foreign \
     gstat \
     hdf5r \
     lidR \
-    lubridate \
     mapdata \
     maptools \
     mapview \
@@ -54,21 +44,12 @@ RUN install2.r --error \
     rgdal \
     rgeos \
     rlas \
-    plotly \
     sf \
     sp \
     spacetime \
     spatstat \
     spdep \
-    tmap \
-    truncreg \
     geoR \
-    geosphere 
-
-## from bioconductor  
-RUN R -e "BiocInstaller::biocLite('rhdf5')"
-
-## from Github
-RUN R -e "devtools::install_github('hadley/ggplot2')" 
-RUN R -e "devtools::install_github('sinhrks/ggfortify')" 
-RUN R -e "devtools::install_github("easyGgplot2", "kassambara")" 
+    geosphere \
+    ## from bioconductor
+    && R -e "BiocInstaller::biocLite('rhdf5')"

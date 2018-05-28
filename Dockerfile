@@ -29,7 +29,7 @@ RUN apt-get update \
     protobuf-compiler \
     tk-dev \
     unixodbc-dev \
-  && install2.r --error \
+RUN install2.r --error \
     PerformanceAnalytics \
     RColorBrewer \
     RandomFields \
@@ -63,13 +63,12 @@ RUN apt-get update \
     tmap \
     truncreg \
     geoR \
-    geosphere \
-    ## from bioconductor
-    && R -e "BiocInstaller::biocLite('rhdf5')" \
-    ## from Github
-    && R -e "devtools::install_github('hadley/ggplot2')" \
-    && R -e "devtools::install_github('sinhrks/ggfortify')" \
-    && R -e "devtools::install_github("easyGgplot2", "kassambara")" 
-    
+    geosphere 
 
-    
+## from bioconductor  
+RUN R -e "BiocInstaller::biocLite('rhdf5')"
+
+## from Github
+RUN R -e "devtools::install_github('hadley/ggplot2')" 
+RUN R -e "devtools::install_github('sinhrks/ggfortify')" 
+RUN R -e "devtools::install_github("easyGgplot2", "kassambara")" 

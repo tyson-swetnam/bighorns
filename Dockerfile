@@ -53,3 +53,13 @@ RUN apt-get update \
     geosphere \
     ## from bioconductor
     && R -e "BiocInstaller::biocLite('rhdf5')"
+RUN install2.r --error \
+    PerformanceAnalytics \
+    boot \
+    devtools \
+    dlm \
+    dplyr \
+    foreign \
+    lubridate \
+    plotly \
+    truncreg

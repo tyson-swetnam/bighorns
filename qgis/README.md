@@ -8,9 +8,15 @@ To calculate the heat load index I used my [EEMT](https://github.com/cyverse-gis
 
 I will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/)  each GPS collar location for the monthly summed global irradiation and hours of insolation, in addition to calculating the heat index of the site, and topographic metrics
 
+# Files
+
+**csv_read.py** This python script loops through a directory of files and samples the rasters by day and hour, outputs are read to an output CSV file.
+
+**qgis_project.py** This python script loads the base DEM and slope, aspect layers into QGIS. 
+
 # Data
 
-The outputs were generated using GRASS r.sun.mp or r.sun.hourly
+Data from the r.sun.mp are stored on Tyson's CyVerse DataStore. To regenerate the data, see the instructions in the [GRASS](../grass) folder. 
 
 |r.sun|Direct Beam Radiation (daily)|Global Radiation (daily)|Global Radiation (monthly)|Daily hours| Monthly hours|
 |-----|-----------------------------|------------------------|--------------------------|-----------|--------------|

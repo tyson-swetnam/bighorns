@@ -4,9 +4,9 @@ In QGIS I used the [Point Sampling Tool](https://plugins.qgis.org/plugins/points
 
 In order to sample the hourly solar radiation models I wrote a python script to loop through the dataset by row and sample each observation for the corresponding hour of each particular day.
 
-To calculate the heat load index I used my [EEMT](https://github.com/cyverse-gis/eemt) program to calculate the daily global irradiation of the sites.
+To calculate the heat load index I used my [EEMT](https://github.com/cyverse-gis/eemt) program to generate the daily global irradiation of complex terrain, flat surfaces, and hours of sun, of the sites.
 
-I will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/)  each GPS collar location for the monthly summed global irradiation and hours of insolation, in addition to calculating the heat index of the site, and topographic metrics
+I used the [point sample tool](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/) to extract topographic metrics of each site.
 
 # Docker
 
@@ -20,6 +20,16 @@ docker run --rm --name="qgis-desktop-2.18" \
 	-v ${HOME}:/home/${USER} \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-e DISPLAY=unix$DISPLAY \
+	kartoza/qgis-desktop:2.18 
+```
+
+On Atmosphere:
+
+```
+docker run --rm --name="qgis-desktop-2.18" \
+	-i -t \
+	-v ${HOME}:/home/${USER} \
+	-v /vol_c:/vol_c \
 	kartoza/qgis-desktop:2.18 
 ```
 

@@ -8,6 +8,21 @@ To calculate the heat load index I used my [EEMT](https://github.com/cyverse-gis
 
 I will [point sample](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/)  each GPS collar location for the monthly summed global irradiation and hours of insolation, in addition to calculating the heat index of the site, and topographic metrics
 
+# Docker
+
+I ran these analyses in QGIS 2.18 with Python 2.7. With the release of QGIS 3, the version of Python has also gone to 3.51.
+
+To repeat the analyses, I suggest using a Docker container from [kartoza/qgis-desktop](https://hub.docker.com/r/kartoza/qgis-desktop/):
+
+```
+docker run --rm --name="qgis-desktop-2.18" \
+	-i -t \
+	-v ${HOME}:/home/${USER} \
+	-v /tmp/.X11-unix:/tmp/.X11-unix \
+	-e DISPLAY=unix$DISPLAY \
+	kartoza/qgis-desktop:2.18 
+```
+
 # Files
 
 **csv_read.py** This python script loops through a directory of files and samples the rasters by day and hour, outputs are read to an output CSV file.

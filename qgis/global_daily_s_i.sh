@@ -1,5 +1,8 @@
 #!/bin/bash
  
+# Calculates S_i (Rasmussen et al. 2015) from the Daily radiation outputs.
+
+# In Atmosphere VM:
 # sudo singularity shell --bind /vol_c /vol_c/eemt-current
 # apt-get install python-gdal
 

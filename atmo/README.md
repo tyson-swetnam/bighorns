@@ -31,15 +31,6 @@ ezs
 
 [Rocker's Docker Containers for R](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
 
-### Run Rocker Geospatial Docker with Singularity:
-
-```
-singularity exec --bind /scratch --bind /vol_c docker://rocker/geospatial:latest 
-```
-
-You can log into RStudio using your CyVerse Atmosphere username and password.
-
-Note: I am using the flag `--bind` to bind in the VM's directory structure `/scratch` directory. 
 
 ### Run Singularity container with QGIS, GRASS, SAGA-GIS:
 
@@ -55,12 +46,3 @@ singularity exec --bind /scratch shub://tyson-swetnam/osgeo-singularity qgis
 ezd
 sudo usermod -aG docker $USER
 ```
-
-### Run Rocker Geospatial Docker
-
-```
-docker run -v /scratch -v /vol_c -it -d -p 8787:8787 rocker/geospatial
-```
-Copy the Atmosphere VM's IP address and add the port `:8787` to the end
-
-Open RStudio with the default username `rstudio` and password `rstudio`

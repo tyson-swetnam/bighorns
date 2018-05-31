@@ -4,7 +4,7 @@ In QGIS I used the [Point Sampling Tool](https://plugins.qgis.org/plugins/points
 
 In order to sample the hourly solar radiation models I wrote a python script to loop through the dataset by row and sample each observation for the corresponding hour of each particular day.
 
-To calculate the heat load index I used my [EEMT](https://github.com/cyverse-gis/eemt) program to generate the daily global irradiation of complex terrain, flat surfaces, and hours of sun, of the sites.
+To calculate the heat load index I used my [EEMT](https://github.com/cyverse-gis/eemt) program to generate the daily global irradiation of complex terrain, flat surfaces, and hours of sun.
 
 I used the [point sample tool](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/) to extract topographic metrics of each site.
 

@@ -8,6 +8,16 @@ To calculate the heat load index I used my [EEMT](https://github.com/cyverse-gis
 
 I used the [point sample tool](https://pvanb.wordpress.com/2010/02/15/sampling-raster-values-at-point-locations-in-qgis/) to extract topographic metrics of each site.
 
+# Singularity
+
+I have built the latest version of QGIS 3 in a Singularity container hosted on [SingularityHub](https://www.singularity-hub.org/collections/567)
+
+The QGIS container can be launched using the command:
+
+```
+singularity exec --bind /vol_c --bind /scratch shub://tyson-swetnam/osgeo-singularity qgis
+```
+
 # Docker
 
 I ran these analyses in QGIS 2.18 with Python 2.7. With the release of QGIS 3, the version of Python has also gone to 3.51.

@@ -1,5 +1,9 @@
 # RStudio-Server
 
+I am running a Docker container for RStudio-Server which is supported by the [Rocker Group](https://hub.docker.com/r/rocker/geospatial/)
+
+[Guide: Rocker's Docker Containers for R](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
+
 ### Docker Rocker/Geospatial
 
 After you've installed Docker, run:

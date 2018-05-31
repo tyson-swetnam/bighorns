@@ -48,8 +48,3 @@ Data from the r.sun.mp are stored on Tyson's CyVerse DataStore. To regenerate th
 |r.sun|Direct Beam Radiation (daily)|Global Radiation (daily)|Global Radiation (monthly)|Daily hours| Monthly hours|
 |-----|-----------------------------|------------------------|--------------------------|-----------|--------------|
 |Units| w m<sup>2<sup> | w m<sup>2<sup> | w m<sup>2<sup> | hours | hours |
-
-
-|Topography|Slope|Aspect|Topographic Position Index|Topographic Wetness Index|Complexity|
-|----------|-----|------|--------------------------|-------------------------|----------|
-|Units|radians|radians|unitless|$$ln(slope)/\alpha$$|?|

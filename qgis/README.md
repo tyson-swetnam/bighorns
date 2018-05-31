@@ -22,9 +22,7 @@ singularity exec --bind /vol_c --bind /scratch shub://tyson-swetnam/osgeo-singul
 
 # Docker
 
-I ran these analyses in QGIS 2.18 with Python 2.7. With the release of QGIS 3, the version of Python has also gone to 3.51.
-
-To repeat the analyses, I suggest using a Docker container from [kartoza/qgis-desktop](https://hub.docker.com/r/kartoza/qgis-desktop/):
+I initially ran these analyses in QGIS 2.18 with Python 2.7. With the release of QGIS 3, the version of Python has also gone to 3.51. To repeat the analyses using the Python2 scripts I've provided, I suggest using a Docker container from [kartoza/qgis-desktop](https://hub.docker.com/r/kartoza/qgis-desktop/):
 
 ```
 docker run --rm --name="qgis-desktop-2.18" \

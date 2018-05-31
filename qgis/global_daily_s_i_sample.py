@@ -1,4 +1,4 @@
-#!/bin/bash/env python
+#!/bin/bash/env python2 
 
 # Script should be run in QGIS 2.18
 

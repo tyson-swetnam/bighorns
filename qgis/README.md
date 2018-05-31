@@ -45,7 +45,7 @@ docker run --rm --name="qgis-desktop-2.18" \
 
 # Data
 
-Data from the r.sun.mp are stored on Tyson's CyVerse DataStore. To regenerate the data, see the instructions in the [GRASS](../grass) folder. 
+Data from the r.sun.mp runs are maintained in Tyson's CyVerse DataStore. To regenerate the data, see the instructions in the [GRASS](../grass) folder. 
 
 |r.sun|Direct Beam Radiation (daily)|Global Radiation (daily)|Global Radiation (monthly)|Daily hours| Monthly hours|
 |-----|-----------------------------|------------------------|--------------------------|-----------|--------------|

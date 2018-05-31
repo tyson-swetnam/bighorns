@@ -1,3 +1,5 @@
+#!/bin/bash/env python2 
+
 import csv, os
 
 # Set input file directory

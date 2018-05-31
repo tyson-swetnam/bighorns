@@ -1,4 +1,4 @@
-#!/bin/bash/env python
+#!/bin/bash/env python 2
 
 # This script imports the necessary layers for calculating EEMT in the QGIS Python Console
 from osgeo import gdal

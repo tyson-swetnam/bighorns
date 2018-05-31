@@ -28,18 +28,10 @@ To repeat the analyses, I suggest using a Docker container from [kartoza/qgis-de
 docker run --rm --name="qgis-desktop-2.18" \
 	-i -t \
 	-v ${HOME}:/home/${USER} \
+	-v /vol_c:/vol_c \
+	-v /scratch:/scratch \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-e DISPLAY=unix$DISPLAY \
-	kartoza/qgis-desktop:2.18 
-```
-
-On Atmosphere:
-
-```
-docker run --rm --name="qgis-desktop-2.18" \
-	-i -t \
-	-v ${HOME}:/home/${USER} \
-	-v /vol_c:/vol_c \
 	kartoza/qgis-desktop:2.18 
 ```
 

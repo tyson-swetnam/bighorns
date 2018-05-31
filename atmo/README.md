@@ -29,17 +29,6 @@ cd bighorns
 ezs
 ```
 
-[Rocker's Docker Containers for R](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
-
-
-### Run Singularity container with QGIS, GRASS, SAGA-GIS:
-
-I suggest that you run Singularity from within the Atmosphere Web Desktop. This is because the Web Desktop is faster than X11 remote desktop.
-
-```
-singularity exec --bind /scratch shub://tyson-swetnam/osgeo-singularity qgis
-```
-
 ## Install Docker
 
 ```

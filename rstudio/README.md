@@ -13,6 +13,7 @@ docker run \
   -d \
   -v ${HOME}:/home/${USER} \
   -v /scratch \
+  -v /vol_b \
   -v /vol_c \
   -it -p 8787:8787 \
   tswetnam/bighorns:latest

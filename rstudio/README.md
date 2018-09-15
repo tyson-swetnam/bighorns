@@ -6,16 +6,21 @@ I am running a Docker container for RStudio-Server which is supported by the [Ro
 
 ### Docker Rocker/Geospatial
 
-After you've installed Docker, run:
+After you've installed Docker, pull the container:
 
 ```
-docker run \
-  -d \
-  -v ${HOME}:/home/${USER} \
-  -v /scratch \
-  -v /vol_b \
-  -v /vol_c \
-  -it -p 8787:8787 \
+docker pull tswetnam/bighorns
+```
+
+Run the container detached with extra volumes:
+
+```
+docker run   \
+  -d \  
+  -v ${HOME}:/home/${USER}   \
+  -v /scratch:/scratch   \
+  -v /vol_b:/vol_b   \
+  -it -p 8787:8787   \
   tswetnam/bighorns:latest
 ```
 

@@ -43,7 +43,13 @@ docker pull tswetnam/bighorns
 ```
 
 ```
-docker run 
+docker run   \
+  -d \  
+  -v ${HOME}:/home/${USER}   \
+  -v /scratch:/scratch   \
+  -v /vol_b:/vol_b   \
+  -it -p 8787:8787   \
+  tswetnam/bighorns:latest
 ```
 
 ## acknowledgements

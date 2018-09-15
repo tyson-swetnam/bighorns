@@ -38,19 +38,8 @@ RStudio Server .RMD files
 
 I have ported the [Rocker/Geospatial](https://hub.docker.com/r/rocker/geospatial/) Dockerfile from DockerHub and added a few more libraries to run our analyses in RStudio-Server.
 
-```
-docker pull tswetnam/bighorns
-```
+The container is hosted at https://hub.docker.com/tswetnam/bighorns.
 
-```
-docker run   \
-  -d \  
-  -v ${HOME}:/home/${USER}   \
-  -v /scratch:/scratch   \
-  -v /vol_b:/vol_b   \
-  -it -p 8787:8787   \
-  tswetnam/bighorns:latest
-```
 
 ## acknowledgements
 

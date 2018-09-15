@@ -10,11 +10,12 @@ After you've installed Docker, run:
 
 ```
 docker run \
+  -d \
   -v ${HOME}:/home/${USER} \
   -v /scratch \
   -v /vol_c \
   -it -p 8787:8787 \
-  rocker/geospatial:latest
+  tswetnam/bighorns:latest
 ```
 
 Copy the Atmosphere VM's IP address into the browser and add the port `:8787` 

@@ -40,13 +40,14 @@ library(plyr)
 
 ## Import data
 
-This file command uses iRODS to move the data from my datastore, which I've authenticated to on my laptop.
+These data are private, access can be requested by contacting the owner, T.L. Swetnam tswetnam@cyverse.org or tswetnam@email.arizona.edu 
+
 ```{r}
-#Import project folder to RStudio - if you're seeing this file, you're data are not on the RStudio VM yet.
-system("mkdir -p /Users/tyson_swetnam/Downloads/bighorns")
+#Import project folder to RStudio - if you're seeing this file, data are not on the RStudio VM yet.
+system("mkdir -p ~/bighorns")
 setwd("/Users/tyson_swetnam/Downloads/bighorns")
-system("iget -KPbfrT --retries 3 -X checkpoint-file /iplant/home/tyson_swetnam/bighorns/CPNWR_DBS_Locs_02Nov17.csv /Users/tyson_swetnam/Downloads/bighorns")
-system("iget -KPbfrT --retries 3 -X checkpoint-file /iplant/home/tyson_swetnam/bighorns/gps_global_beam_flat_temp.csv /Users/tyson_swetnam/Downloads/bighorns")
+system("iget -KPbfrT --retries 3 -X checkpoint-file /iplant/home/tyson_swetnam/bighorns/CPNWR_DBS_Locs_02Nov17.csv ~/bighorns")
+system("iget -KPbfrT --retries 3 -X checkpoint-file /iplant/home/tyson_swetnam/bighorns/gps_global_beam_flat_temp.csv ~/bighorns")
 ``` 
 
 ## Load data
